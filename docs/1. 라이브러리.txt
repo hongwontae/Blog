@@ -1,0 +1,41 @@
+1. Tailwind
+1-1. npm install tailwindcss @tailwindcss/vite
+1-2. vite.config.ts에서 
+=> export default defineConfig({
+  plugins: [
+    tailwindcss(),
+  ],
+})
+1-3. index.css에서 @import "tailwindcss";
+
+=> 테스트 및 확인 완료
+
+
+2. React Router
+2-1. npm install react-router-dom
+2-2. createBrowserRouter, RouterProvider를 통해 초기 설정
+
+=> 테스트 및 확인 완료
+
+
+3. react-query
+3-1. npm install @tanstack/react-query
+3-2. QueryClient, QueryClientProvider를 초기 설정
+3-3. React Router와 함께 사용 => <QueryClientProvider>가 최상위로 RouterProvider를 덮어야 합니다.
+
+=> 테스트 및 확인 완료
+
+
+4. Framer Motion
+4-1. npm install motion
+4-2. <motion.div props..>
+
+=> 테스트 및 확인 완료
+
+
+5. zustand
+5-1. npm install zustand
+5-2. zustand에서 create 함수를 가져와서 상태, 상태 변경함수를 가져와서 초기 정의합니다.
+5-3. 사용할 컴포넌트에서 상태나 변경함수를 가져와 사용합니다.
+
+=> 테스트 및 확인 완료
