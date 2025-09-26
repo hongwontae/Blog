@@ -1,4 +1,4 @@
-import HWTIcon from "../assets/HWT Light Icon.png";
+import HWTIcon from "../assets/Final HWT Icon.png";
 import BlogIcon from "../assets/Blog Icon.png";
 import ResumeIcon from "../assets/Resume Icon.png";
 import ExhibitionIcon from "../assets/Exhibition Icon.png";
@@ -8,7 +8,7 @@ function Header() {
   return (
     <>
       <header className="flex flex-row justify-between">
-        <div className="flex flex-row items-center gap-4">
+        <div className="flex flex-row items-center gap-3">
           <div className="w-10 h-10">
             <img
               src={HWTIcon}
@@ -20,7 +20,7 @@ function Header() {
             className="text-white font-semibold"
             whileHover={{ color: "#EF476F" }}
           >
-            Frontend & Design
+            Frontend & UI/UX Design
           </motion.div>
         </div>
         <div className="text-white flex flex-row gap-10">

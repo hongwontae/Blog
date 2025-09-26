@@ -1,11 +1,8 @@
 function BlogHome() {
 
-
-
-
   return (
     <>
-
+    
     </>
   );
 }
