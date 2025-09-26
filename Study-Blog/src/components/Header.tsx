@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 function Header() {
   return (
     <>
-      <header className="flex flex-row justify-between">
+      <header className="flex flex-row justify-between items-center">
         <div className="flex flex-row items-center gap-3">
           <div className="w-10 h-10">
             <img
