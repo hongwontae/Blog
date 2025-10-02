@@ -4,29 +4,32 @@ import SnowImage from "../assets/LeftIntroduce-Image/Snow Image.png";
 import EditSnowImage from "../assets/LeftIntroduce-Image/Edit Snow Image.png";
 
 function LeftIntroduce() {
-  const [hovered, setHovered] = useState(false);
+
 
   return (
-    <figure
-      className="w-[28rem] relative h-[30rem]"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
+    <>
+      <div className="relative w-[20rem] h-[19rem] overflow-hidden rounded-xl">
+      {/* 기본 이미지 */}
       <motion.img
         src={SnowImage}
-        className="absolute top-0 left-0 h-[20rem] w-[16rem] rounded-2xl object-cover"
-        animate={{ opacity: hovered ? 0 : 1 }}
+        alt="default"
+        className="absolute w-full h-full object-cover"
+        whileHover={{ opacity: 0 }}
         transition={{ duration: 0.4 }}
       />
 
+      {/* hover 이미지 */}
       <motion.img
         src={EditSnowImage}
-        className="absolute top-0 left-0 h-[20rem] w-[16rem] rounded-2xl object-cover"
-        animate={{ opacity: hovered ? 1 : 0 }}
+        alt="hover"
+        className="absolute w-full h-full object-cover"
+        initial={{ opacity: 0 }}
+        whileHover={{ opacity: 1 }}
         transition={{ duration: 0.4 }}
       />
-    </figure>
-  );
+    </div>
+    </>
+  )
 }
 
 export default LeftIntroduce;
