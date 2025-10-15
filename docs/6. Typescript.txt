@@ -1,0 +1,4 @@
+1. props 타입 규정
+1-1. type으로 규정합니다.
+1-2. type subType = {kkk : string; hehe : number;}
+=> type 중괄호 key : value 다음에 ;를 붙힙니다.

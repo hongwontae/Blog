@@ -1,0 +1,53 @@
+1. animate
+1-1. 무엇으로 변할지를 정의합니다. 컴포넌트가 최종적으로 어떤 상태로 애니메이션될지 지정합니다.
+
+1-2. 동작 방식
+    1. 처음 렌더링 시, initial 상태를 렌더링합니다.
+    (initial 상태는 motion 컴포넌트에서 inital로 설정할 수 있지만 항상 컴포넌트 class로 설정할 수 도 있습니다.)
+    2. 그리고 animate 상태로 변화합니다.
+    3. animate 값이 바뀌면 FM이 자동으로 트윈 애니메이션을 적용합니다.
+
+1-3. animate 속성에 상태에 따른 변경을 정의하면 상태에 따른 다른 애니메이션을 적용할 수 있습니다.
+
+
+2. transition
+    2-1. 애니메이션의 시간, 방식, 지연 등을 제어합니다.
+
+    2-2. duration : 애니메이션이 지속되는 시간
+    2-3. ease : 가속/감속 곡선
+        1. linear : 일정속도
+        2. easeIn : 느리게 시작
+        3. easeOut : 느리게 끝남
+        4. easeInOut : 느리게 시작 + 느리게 끝남
+    2-4. delay : 애니메이션 시작 전 대기 시간
+    2-5. repeat : 반복 횟수 / Infinity 가능
+    2-6. repeatType : 반복 방식 (spring)
+
+    2-7. type : 애니메이션 타입 지정
+        1. tween (기본값) : 전통적인 시간 기반, duration, ease를 사용
+
+        2. spring : 시간 대신 힘과 저항으로 제어합니다. (스프링처럼 진동하며 자연스럽게 감속하는 애니메이션)
+            2-1. stiffness : 스프링 강도
+            2-2. damping : 감속 정도
+            2-3. mass : 질량
+
+        3. inertia : 스크롤이나 드래그 이후 관성 운동 시 사용합니다.
+            3-1. velocity로 시작합니다.
+            3-2. timeConstant에 따라 서서히 감속합니다.
+            3-3. power : 움직임 강도 (클수록 멀리갑니다.)
+            3-4. bounceStiffness, bounceDamping : 경계에 부딪힐 떄 반동 정도
+
+    2-8. transition default value
+        1. type : tween -> 시간 기반
+        2. duration : 0.3
+        3. ease : easeOut
+        4. delay : 0
+        5. repeat : x
+        6. repeatType : loop (반복 시에만)
+
+
+3. variants
+3-1. 하나의 컴포넌트가 가질 수 있는 여러 상태를 미리 정의하고 animate나 whileHover..등으로 해당 상태를 
+ 불러오는 시스템입니다. (여러 상태를 이름으로 묶어 관리합니다.)
+
+3-2. 

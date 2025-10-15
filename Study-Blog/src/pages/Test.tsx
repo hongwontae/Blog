@@ -8,16 +8,10 @@ function Test() {
     <>
       <div className="text-white flex flex-col items-center">
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{borderWidth : '12px', borderColor : "#de222a"}}
+          animate={{ borderWidth : '1px' }}
           transition={{ duration: 1 }}
-          style={{
-            width: 100,
-            height: 100,
-            backgroundColor: "red",
-            margin: "50px auto",
-          }}
-        ></motion.div>
+        >Hello-World</motion.div>
         <div>Hello!</div>
 
         <div>{count}</div>
