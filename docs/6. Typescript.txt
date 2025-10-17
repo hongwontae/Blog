@@ -2,3 +2,84 @@
 1-1. type으로 규정합니다.
 1-2. type subType = {kkk : string; hehe : number;}
 => type 중괄호 key : value 다음에 ;를 붙힙니다.
+
+
+2. 함수
+2-1. 매개변수 타입은 () 안에 규정합니다.
+2-2. 반환타입은 () 뒤에 규정합니다.
+
+
+3. keyof
+3-1. 객체의 키 이름들을 문자열 리터럴로 취급하여 유니온 타입으로 만듭니다.
+3-2. keyof는 타입에서만 키를 추출합니다. 값 자체에 keyof는 사용이 불가능합니다.
+
+
+4. as const
+4-1. 리터럴 타입을 고정하고, 객체나 배열을 읽기 전용으로 만드는 특별한 문법입니다.
+(리터럴 타입이란? -> 문자열 그 자체가 타입이 됩니다. string이지만 "pending", "success" 이렇게 문자열 자체로 좁혀집니다.)
+4-2. 객체 뒤에 as const가 붙으면?
+    const oobj = {
+        a : 1,
+        b : "heell"
+        c : false
+    } as const;
+    Type oobjType = typeof oobj;
+
+    result : Type oobjType = {
+        readonly a : "1";
+        readonly b : "heell";
+        readonly c : "false"
+    }
+4-3. as const는 값도 되고 타입도 될 수 있는 개념입니다.
+    1. const dd = oobj.a => 1
+    2. Type ddd : obj.a => "1"
+    => 값은 그대로지만 타입은 리터럴 타입 "1"로 고정됩니다.
+
+
+
+5. typof
+5-1. 자바스크립트에서는 값의 타입을 문자열로 반환하는 연산자입니다.
+5-2. 타입스크립에서는 값에서 타입을 가져오는 연산자입니다.
+    case-1. const num = 10; type numType = typeof num;
+    case-2. const obj = {
+        a : 1,
+        b : 'string',
+        c : true
+    }
+    type ObjType = typeof obj;
+
+    result : type objType = {
+        a : number;
+        b : string;
+        c : boolean
+    }
+
+
+6. 유니온 + 대괄호 타입 접근
+6-1. type Keys = "a" | "b";
+     type Values = typeof obj[Keys]; === typeof obj["a"] | typeof obj["b"]
+     = number | number
+     = number
+
+6-2. ** 대괄호 안에 유니온 키가 들어가도 TS는 a를 넣었을 때 타입, b를 넣었을 때 
+ 타입를 각각 계산해서 모두 합쳐서 유니온 타입으로 만들어줍니다. **
+
+
+ 
+7. keyof + typeof 활용법 case-1
+7-1.  const categories = {
+    react: "React",
+    js: "JavaScript",
+    css: "CSS",
+    } as const;
+
+    type CategoryKey = keyof typeof categories;  -> "react" | "js" | "css"
+    type CategoryValue = typeof categories[CategoryKey]; -> "React" | "JavaScript" | "CSS"
+
+
+7-2. 해설
+    1. as const에 의해서 categories.key에 접근하여 타입을 알아낼 떄 string이 아닌 리터럴이 타입이 됩니다.
+    2. keyof는 값에 사용할 수 없습니다.
+    3. typeof categories로 객체 형태를 갖춘 타입이 반환되고 keyof로 key 리터럴 + 유니온이 반환됩니다.
+    4. 타입을 알아낼 때 대괄호 안 유니온은 각각 타입을 알아내고 다시 유니온으로 만듭니다.
+    => 그래서 값을 기준으로 한 유니온 타입이 result로 나옵니다.

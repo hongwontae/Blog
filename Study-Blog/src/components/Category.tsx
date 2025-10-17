@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { useState } from "react";
 import CategoryElement from "./CategoryElement";
 
@@ -21,55 +20,89 @@ function Category() {
     photoshop: false,
   });
 
+  const CategoryClass = "p-[0.4rem] pl-3 pr-3 rounded-2xl bg-white text-black";
+  const whileHoverObject = {
+    backgroundColor: "#121212",
+    color: "#ef476f",
+    transition: { type: "tween", duration: 0.5 },
+  } as const;
+
+  function clickFunction(key: keyof ClickState) {
+    setClickState((prev) => {
+      return {
+        ...prev,
+        [key]: !prev[key],
+      };
+    });
+  }
+
+  function animateFunction(data: keyof ClickState): {
+    backgroundColor: string;
+    color: string;
+  } {
+    return {
+      backgroundColor: clickState[data] ? "#121212" : "",
+      color: clickState[data] ? "#ffffff" : "",
+    };
+  }
+
+
+
   return (
     <>
       <section className="flex flex-row justify-start text-white text-[1.1rem] items-center gap-7">
         <h1 className="font-semibold text-[1.4rem]">Category</h1>
         <div className="flex flex-row gap-3">
           <CategoryElement
-            className="p-[0.4rem] pl-3 pr-3 rounded-2xl bg-category-box-color"
-            animate={{ background: clickState.react ? "#ffffff" : "",color: clickState.react ? "#121212" : "",}}
-            whileHover={{ background: "#121212" }}
-            transition={{}}
-            onClickFunc={() => setClickState((prev) => {
-                return {
-                  ...prev,
-                  react: !prev.react,
-                };
-              })}
+            className={CategoryClass}
+            animate={animateFunction("react")}
+            whileHover={whileHoverObject}
+            onClickFunc={() => clickFunction("react")}
           >
             React
           </CategoryElement>
-          <motion.div
-            whileHover={{ background: "#121212" }}
-            className="p-[0.4rem] pl-3 pr-3 rounded-2xl bg-category-box-color"
+
+          <CategoryElement
+            className={CategoryClass}
+            animate={animateFunction("figma")}
+            whileHover={whileHoverObject}
+            onClickFunc={() => clickFunction("figma")}
           >
             Figma
-          </motion.div>
-          <motion.div
-            whileHover={{ background: "#121212" }}
-            className="p-[0.4rem] pl-3 pr-3 rounded-2xl bg-category-box-color"
+          </CategoryElement>
+
+          <CategoryElement
+            className={CategoryClass}
+            animate={animateFunction("javascript")}
+            whileHover={whileHoverObject}
+            onClickFunc={() => clickFunction("javascript")}
           >
             JavaScript
-          </motion.div>
-          <motion.div
-            whileHover={{ background: "#121212" }}
-            className="p-[0.4rem] pl-3 pr-3 rounded-2xl bg-category-box-color"
+          </CategoryElement>
+          <CategoryElement
+            className={CategoryClass}
+            animate={animateFunction("typescript")}
+            whileHover={whileHoverObject}
+            onClickFunc={() => clickFunction("typescript")}
           >
             TypeScript
-          </motion.div>
-          <motion.div
-            whileHover={{ background: "#121212" }}
-            className="p-[0.4rem] pl-3 pr-3 rounded-2xl bg-category-box-color"
+          </CategoryElement>
+          <CategoryElement
+            className={CategoryClass}
+            animate={animateFunction("css")}
+            whileHover={whileHoverObject}
+            onClickFunc={() => clickFunction("css")}
           >
             CSS
-          </motion.div>
-          <motion.div
-            whileHover={{ background: "#121212" }}
-            className="p-[0.4rem] pl-3 pr-3 rounded-2xl bg-category-box-color"
+          </CategoryElement>
+          <CategoryElement
+            className={CategoryClass}
+            animate={animateFunction("photoshop")}
+            whileHover={whileHoverObject}
+            onClickFunc={() => clickFunction("photoshop")}
           >
             Photoshop
-          </motion.div>
+          </CategoryElement>
         </div>
       </section>
     </>

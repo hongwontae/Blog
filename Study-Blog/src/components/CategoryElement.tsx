@@ -2,17 +2,18 @@ import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 
 type Category = {
-  onClickFunc: () => void;
+  onClickFunc: React.MouseEventHandler<HTMLDivElement>
   className: string;
   animate: {
-    background: string;
+    backgroundColor: string;
     color: string;
   };
   whileHover: {
-    background: string;
+    backgroundColor: string;
+    color : string;
+    transition : {type : "spring" | "tween" | "inertia", [key : string] : number | string}
   };
   children: ReactNode;
-  transition : {}
 };
 
 function CategoryElement({
@@ -21,7 +22,6 @@ function CategoryElement({
   onClickFunc,
   whileHover,
   animate,
-  transition
 }: Category) {
   return (
     <>
@@ -30,7 +30,6 @@ function CategoryElement({
         onClick={onClickFunc}
         whileHover={whileHover}
         animate={animate}
-        transition={transition}
       >
         {children}
       </motion.div>

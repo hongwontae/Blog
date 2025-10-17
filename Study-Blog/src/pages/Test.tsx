@@ -8,10 +8,11 @@ function Test() {
     <>
       <div className="text-white flex flex-col items-center">
         <motion.div
-          initial={{borderWidth : '12px', borderColor : "#de222a"}}
-          animate={{ borderWidth : '1px' }}
-          transition={{ duration: 1 }}
-        >Hello-World</motion.div>
+        initial={{backgroundColor : '#ffffff', color : '#121212'}}
+        whileHover={{backgroundColor : '#eded32', color : '#ffffff', transition : {type : 'tween', duration : 0.5}}}
+        >
+          Hello-World
+        </motion.div>
         <div>Hello!</div>
 
         <div>{count}</div>
