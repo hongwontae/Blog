@@ -1,0 +1,10 @@
+1. 배열 타입
+1-1. const numbers : number[] = [1,2,3]
+=> type[], 배열안에 데이터는 type이다.
+
+1-2. type Item = {
+    userId : number;
+    title : string;
+ }
+ const Items : Item[] = [{userId : 1, title : 'asdasda'}, {userId : 3, title : "aaccxxzz"}, ...]
+ => obj[], 배열안에 데이터는 obj 타입이다.

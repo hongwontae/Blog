@@ -18,7 +18,7 @@ function Header() {
           </div>
           <motion.div
             className="text-white font-semibold"
-            whileHover={{ color: "#EF476F" }}
+            whileHover={{color : '#ef476f'}}
           >
             Frontend & UI/UX Design
           </motion.div>

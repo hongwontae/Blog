@@ -1,6 +1,7 @@
 import Category from "../components/Category";
 import Highlights from "../components/Highlights";
 import LeftIntroduce from "../components/LeftIntroduce";
+import PostList from "../components/PostList";
 
 function BlogHome() {
 
@@ -12,6 +13,8 @@ function BlogHome() {
         </section>
         <hr className="border-white border-[0.5px] mb-8"></hr>
         <Category></Category>
+        <PostList></PostList>
+        
     </>
   );
 }
