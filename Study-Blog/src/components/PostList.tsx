@@ -22,7 +22,7 @@ function PostList(){
     return(
         <>
             <main className="mt-10">
-                <div className='flex flex-row flex-wrap gap-10 justify-center text-white'>
+                <div className='flex flex-row flex-wrap gap-10 justify-around text-white'>
                     {data?.map((ele, idx, arr)=>{
                         return <Post body={ele.body} title={ele.title} userId={ele.userId}></Post>
                     })}
