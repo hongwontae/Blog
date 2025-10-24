@@ -1,0 +1,11 @@
+1. request post 요청 test 성공
+=> Post http://localhost:3000/blog/create
+
+2. request post 요청 + DB 저장 
+=> 성공
+
+3. requust patch 요청 + row 수정 및 저장
+=> 성공
+
+4. request delete 요청 + row 삭제 
+=> 성공

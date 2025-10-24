@@ -1,0 +1,23 @@
+### Test Post CreateBlogPost
+Post http://localhost:3000/blog/create
+Content-Type: application/json
+
+{
+    "title" : "Hong Won Tae",
+    "blogContent" : "koaoaoaoao",
+    "createdAt" : "2025-10-24"
+}
+
+
+### Test Update Blog
+Patch http://localhost:3000/blog/update/2
+Content-Type: application/json
+
+{
+    "title" : "Korea is dead?",
+    "blogContent" : "Lorem is goog"
+}
+
+
+### Test Delete Blog
+Delete http://localhost:3000/blog/delete/2
