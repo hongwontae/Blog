@@ -3,14 +3,19 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { BlogEntity } from './entities/blog.entity';
 import { Repository } from 'typeorm';
 import { BlogReqDto } from './dtos/blog.req.dto';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class BlogService {
 
-    constructor(@InjectRepository(BlogEntity) private repo : Repository<BlogEntity>){};
+    constructor(@InjectRepository(BlogEntity) private repo : Repository<BlogEntity>,
+                private configService : ConfigService){};
 
     createPost(title : string, blogContent : string, field : string){
+        console.log(this.configService.get<string>('name'));
+        
         const post = this.repo.create({title,blogContent,field});
+
         return this.repo.save(post);
     }
 

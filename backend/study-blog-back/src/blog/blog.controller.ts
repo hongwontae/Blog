@@ -9,6 +9,7 @@ export class BlogController {
 
     @Post('/create')
     createBlogPost(@Body() body : BlogReqDto){
+        console.log('jj')
         return this.blogService.createPost(body.title, body.blogContent, body.field);
     }
 
