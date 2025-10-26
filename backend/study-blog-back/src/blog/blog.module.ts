@@ -3,12 +3,12 @@ import { BlogController } from './blog.controller';
 import { BlogService } from './blog.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BlogEntity } from './entities/blog.entity';
-import { ImageService } from './image.service';
+import { CloudinaryModule } from 'src/cloudinary/cloudinary.module';
 
 @Module({
-  imports : [TypeOrmModule.forFeature([BlogEntity])],
+  imports : [TypeOrmModule.forFeature([BlogEntity]), CloudinaryModule],
   controllers: [BlogController,],
-  providers: [BlogService, ImageService],
+  providers: [BlogService],
   exports : [BlogService]
 })
 export class BlogModule {}

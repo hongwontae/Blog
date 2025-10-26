@@ -1,16 +1,17 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UploadedFile, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { BlogReqDto } from './dtos/blog.req.dto'
 import { BlogService } from './blog.service';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('blog')
 export class BlogController {
 
     constructor(private blogService : BlogService){}
 
+    @UseInterceptors(FileInterceptor('image'))
     @Post('/create')
-    createBlogPost(@Body() body : BlogReqDto){
-        console.log('jj')
-        return this.blogService.createPost(body.title, body.blogContent, body.field);
+    createBlogPost(@Body() body : BlogReqDto,@UploadedFile() file : Express.Multer.File){
+        return this.blogService.createPost(body.title, body.blogContent, body.field, file);
     }
 
     @Patch('/update/:id')

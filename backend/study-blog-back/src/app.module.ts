@@ -3,6 +3,7 @@ import { BlogModule } from './blog/blog.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BlogEntity } from './blog/entities/blog.entity';
 import { ConfigModule } from '@nestjs/config';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { ConfigModule } from '@nestjs/config';
       synchronize: true, // 개발 시에만
     }),
     BlogModule,
+    CloudinaryModule,
   ],
 })
 export class AppModule {}
