@@ -7,8 +7,11 @@ export class BlogEntity{
     @PrimaryGeneratedColumn()
     id : number;
 
-    @Column()
+    @Column({nullable : false})
     title : string;
+
+    @Column({nullable : false})
+    field : string;
 
     @Column({type : 'mediumtext', nullable : false})
     blogContent : string;

@@ -9,8 +9,8 @@ export class BlogService {
 
     constructor(@InjectRepository(BlogEntity) private repo : Repository<BlogEntity>){};
 
-    createPost(title : string, blogContent : string){
-        const post = this.repo.create({title,blogContent});
+    createPost(title : string, blogContent : string, field : string){
+        const post = this.repo.create({title,blogContent,field});
         return this.repo.save(post);
     }
 
@@ -25,11 +25,24 @@ export class BlogService {
     }
 
     async deletePost(id : number){
-        const blog = await this.repo.findOneBy({id});
-        if(!blog){
+        const post = await this.repo.findOneBy({id});
+        if(!post){
             throw new BadRequestException('deleted blog none');
         }
-        return this.repo.remove(blog);
+        return this.repo.remove(post);
+    }
+
+    async showPost(id : number){
+        const post = await this.repo.findOneBy({id});
+        if(!post){
+            throw new BadRequestException('not matched blog post');
+        }
+
+        return post;
+    }
+
+    async showPosts(){
+        
     }
 
 }

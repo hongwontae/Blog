@@ -5,7 +5,7 @@ Content-Type: application/json
 {
     "title" : "Hong Won Tae",
     "blogContent" : "koaoaoaoao",
-    "createdAt" : "2025-10-24"
+    "field" : "react"
 }
 
 
@@ -21,3 +21,7 @@ Content-Type: application/json
 
 ### Test Delete Blog
 Delete http://localhost:3000/blog/delete/2
+
+
+### Test Get Blog
+Get http://localhost:3000/blog/show/3

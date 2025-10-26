@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { BlogReqDto } from './dtos/blog.req.dto'
 import { BlogService } from './blog.service';
 
@@ -9,7 +9,7 @@ export class BlogController {
 
     @Post('/create')
     createBlogPost(@Body() body : BlogReqDto){
-        return this.blogService.createPost(body.title, body.blogContent);
+        return this.blogService.createPost(body.title, body.blogContent, body.field);
     }
 
     @Patch('/update/:id')
@@ -20,6 +20,16 @@ export class BlogController {
     @Delete('/delete/:id')
     deleteBlogPost(@Param('id') id : number){
         return this.blogService.deletePost(id)
+    }
+
+    @Get('/show/:id')
+    showBlogPost(@Param('id') id : number){
+        return this.blogService.showPost(id);
+    }
+
+    @Get('/shows')
+    showBlogPosts(){
+        return 
     }
 
 }
