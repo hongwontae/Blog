@@ -4,6 +4,7 @@ import Layout from "./pages/Layout";
 import BlogHome from "./pages/BlogHome";
 import Test from "./pages/Test";
 import Test2 from "./pages/Test2";
+import BlogPost from "./pages/BlogPost";
 
 const queryClient = new QueryClient();
 
@@ -24,8 +25,9 @@ const router = createBrowserRouter([
   },
   {
     path : '/test/2',
-    element : <Test2></Test2>
-  }
+    element : <BlogPost></BlogPost>
+  },
+
 ]);
 
 function App() {

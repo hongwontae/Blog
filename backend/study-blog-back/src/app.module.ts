@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { BlogEntity } from './blog/entities/blog.entity';
 import { ConfigModule } from '@nestjs/config';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { ImagesEntity } from './blog/entities/images.entity';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
       host: 'localhost',
       username: 'hwt',
       password: '1234',
-      entities: [BlogEntity],
+      entities: [BlogEntity, ImagesEntity],
       synchronize: true, // 개발 시에만
     }),
     BlogModule,
