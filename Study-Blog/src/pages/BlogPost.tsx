@@ -3,66 +3,106 @@ import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
 import PlaceHolder from "@tiptap/extension-placeholder";
+import { useState } from "react";
+
+type ImageWithAlt = {
+  file: File;
+  alt: string;
+};
 
 function BlogPost() {
+  const [images, setImages] = useState<ImageWithAlt[]>([]);
+
   const editor = useEditor({
-    extensions: [StarterKit, Image, Link, PlaceHolder.configure({
-      placeholder : '여기에 블로그 내용을 입력하세요'
-    })],
+    extensions: [
+      StarterKit,
+      Image,
+      Link,
+      PlaceHolder.configure({
+        placeholder: "여기에 블로그 내용을 입력하세요",
+      }),
+    ],
     content: "<p>Hello-World<p/>",
   });
 
-  if (!editor) {
-    return null;
+  console.log(images);
+
+  function handleFiles(e: React.ChangeEvent<HTMLInputElement>) {
+    if (!e.target.files) {
+      return;
+    }
+    const selectedFiles = Array.from(e.target.files);
+
+    const filesWithAlt = selectedFiles.map((file) => {
+      return {
+        file,
+        alt: "123",
+      };
+    });
+
+    setImages((prev) => {
+      return [...prev, ...filesWithAlt];
+    });
+
+    filesWithAlt.forEach(({ alt, file }) => {
+      const url = URL.createObjectURL(file);
+      editor?.chain().focus().setImage({ src: url, alt }).run();
+    });
   }
 
-  function addImage(){
-    const url = prompt('이미지 URL을 입력해주세요');
-    if (url){
-      editor.chain().focus().setImage({src : url}).run()
+  async function submitHandler() {
+    if (images.length === 0) {
+      return;
     }
+
+    const formData = new FormData();
+
+    formData.append("title", "Hellow-world");
+    formData.append("field", "React");
+    formData.append("blogContent", editor.getHTML());
+
+    images.forEach(({ file, alt }) => {
+      formData.append("images", file);
+      formData.append("alt", alt);
+    });
+
+    const response = await fetch("http://localhost:3000/blog/create", {
+      method: "POST",
+      body: formData,
+    });
+    const data = await response.json();
+    console.log(data);
   }
 
   return (
     <>
-<div className="border p-4 rounded-lg">
-      <div className="flex gap-2 mb-2 text-white">
+      <div className="border p-4 rounded-lg">
+        <div className="flex gap-2 mb-2 text-white">
+          <button
+            onClick={() => editor.chain().focus().toggleBold().run()}
+            className="px-2 py-1 border rounded"
+          >
+            Bold
+          </button>
+          <input
+            type="file"
+            multiple
+            accept="image/*"
+            onChange={handleFiles}
+          ></input>
+        </div>
+
+        <EditorContent editor={editor} className="text-white" />
+
         <button
-          onClick={() => editor.chain().focus().toggleBold().run()}
-          className="px-2 py-1 border rounded"
+          onClick={() => {
+            submitHandler();
+          }}
+          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
         >
-          Bold
-        </button>
-        <button
-          onClick={() => editor.chain().focus().toggleItalic().run()}
-          className="px-2 py-1 border rounded"
-        >
-          Italic
-        </button>
-        <button
-          onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-          className="px-2 py-1 border rounded"
-        >
-          H2
-        </button>
-        <button onClick={addImage} className="px-2 py-1 border rounded">
-          이미지 삽입
+          저장
         </button>
       </div>
-
-      <EditorContent editor={editor} className="text-white" />
-
-      <button
-        onClick={() => {
-          const html = editor.getHTML()
-          const json = editor.getJSON()
-          console.log({ html, json })
-        }}
-        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
-      >
-        저장
-      </button>
-    </div>
     </>
   );
 }

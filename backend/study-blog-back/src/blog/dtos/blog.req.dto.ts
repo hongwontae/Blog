@@ -1,4 +1,4 @@
-import { IsString} from 'class-validator';
+import { ArrayNotEmpty, IsArray, IsNumber, IsString} from 'class-validator';
 
 export class BlogReqDto {
 
@@ -10,5 +10,10 @@ export class BlogReqDto {
 
     @IsString()
     field : string;
+
+    @IsArray()
+    @ArrayNotEmpty()
+    @IsString({each : true})
+    alt : string;
 
 }

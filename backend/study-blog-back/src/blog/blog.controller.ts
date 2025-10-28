@@ -21,16 +21,12 @@ export class BlogController {
   @UseInterceptors(FilesInterceptor('images'))
   @Post('/create')
   createBlogPost(
-    @Body() body: BlogReqDto,
+    @Body() body : BlogReqDto,
     @UploadedFiles() files: Express.Multer.File[],
   ) {
     console.log(files)
-    return this.blogService.createPost(
-      body.title,
-      body.blogContent,
-      body.field,
-      files,
-    );
+    console.log(body);
+    return {name : 'ddd'};
   }
 
   @Patch('/update/:id')
