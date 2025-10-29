@@ -2,30 +2,20 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
-import PlaceHolder from "@tiptap/extension-placeholder";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 type ImageWithAlt = {
   file: File;
   alt: string;
 };
-
 function BlogPost() {
   const [images, setImages] = useState<ImageWithAlt[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const editor = useEditor({
-    extensions: [
-      StarterKit,
-      Image,
-      Link,
-      PlaceHolder.configure({
-        placeholder: "여기에 블로그 내용을 입력하세요",
-      }),
-    ],
-    content: "<p>Hello-World<p/>",
+    extensions: [StarterKit, Image, Link],
+    content: "<p>블로그 글은 여기서 작성해주세요.<p/>",
   });
-
-  console.log(images);
 
   function handleFiles(e: React.ChangeEvent<HTMLInputElement>) {
     if (!e.target.files) {
@@ -84,7 +74,17 @@ function BlogPost() {
           >
             Bold
           </button>
+          <button
+            className="px-2 py-1 border rounded"
+            onClick={() => {
+              inputRef?.current?.click();
+            }}
+          >
+            Image Add
+          </button>
           <input
+            ref={inputRef}
+            hidden
             type="file"
             multiple
             accept="image/*"
