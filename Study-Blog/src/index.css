@@ -33,3 +33,29 @@ body {
   margin-right: 100px;
 }
 
+.ProseMirror pre {
+  background-color: #1e1e1e;
+  color: #dcdcdc;
+  padding: 14px 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: "Fira Code", monospace;
+  line-height: 1.5;
+}
+
+/* 코드 내부 텍스트 */
+.ProseMirror code {
+  color: inherit;
+  background: none;
+  font-family: inherit;
+}
+
+.ProseMirror img {
+  max-width: min(800px, 100%);
+  width: auto;
+  height: auto;
+  display: block;
+  margin-left : auto;
+  margin-right : auto;
+  border-radius: 6px;
+}

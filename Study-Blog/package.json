@@ -12,6 +12,9 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.13",
     "@tanstack/react-query": "^5.89.0",
+    "@tiptap/extension-code": "^3.9.0",
+    "@tiptap/extension-code-block": "^3.9.0",
+    "@tiptap/extension-code-block-lowlight": "^3.9.0",
     "@tiptap/extension-image": "^3.8.0",
     "@tiptap/extension-link": "^3.8.0",
     "@tiptap/extension-placeholder": "^3.8.0",
@@ -20,6 +23,8 @@
     "@uiw/react-markdown-preview": "^5.1.5",
     "@uiw/react-md-editor": "^4.0.8",
     "framer-motion": "^12.23.15",
+    "highlight.js": "^11.11.1",
+    "lowlight": "^3.3.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.1",
