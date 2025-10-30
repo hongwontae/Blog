@@ -10,7 +10,7 @@ import {
   UseInterceptors,
   
 } from '@nestjs/common';
-import { BlogReqDto } from './dtos/blog.req.dto';
+import { BlogReqDto, ImageMetadata } from './dtos/blog.req.dto';
 import { BlogService } from './blog.service';
 import { FilesInterceptor } from '@nestjs/platform-express';
 
@@ -21,12 +21,17 @@ export class BlogController {
   @UseInterceptors(FilesInterceptor('images'))
   @Post('/create')
   createBlogPost(
-    @Body() body : BlogReqDto,
+    @Body('title') title : string,
+    @Body('blogContent') blogContent : string,
+    @Body('field') field : string,
+    @Body('metadata') metadataString : string,
     @UploadedFiles() files: Express.Multer.File[],
   ) {
-    console.log(files)
-    console.log(body);
-    return {name : 'ddd'};
+    console.log(field)
+
+    const metadata : ImageMetadata[] = JSON.parse(metadataString)
+    
+    return this.blogService.createPost(title, field, blogContent, metadata, files)
   }
 
   @Patch('/update/:id')

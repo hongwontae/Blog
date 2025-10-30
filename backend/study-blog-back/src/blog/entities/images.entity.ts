@@ -13,6 +13,9 @@ export class ImagesEntity{
     @Column()
     public_id : string;
 
+    @Column()
+    alt : string;
+
     @ManyToOne(()=>BlogEntity, (blog)=>blog.images, {onDelete : 'CASCADE'})
     post : BlogEntity;
 

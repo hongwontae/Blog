@@ -2,7 +2,7 @@ import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BlogEntity } from './entities/blog.entity';
 import { Repository } from 'typeorm';
-import { BlogReqDto } from './dtos/blog.req.dto';
+import { BlogReqDto, ImageMetadata } from './dtos/blog.req.dto';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { ImagesEntity } from './entities/images.entity';
 
@@ -17,20 +17,23 @@ export class BlogService {
 
   async createPost(
     title: string,
-    blogContent: string,
     field: string,
+    blogContent: string,
+    metadata : ImageMetadata[],
     files: Express.Multer.File[],
   ) {
+
     const post = this.repo.create({ title, blogContent, field });
     const postResult = await this.repo.save(post);
 
     const imageEntities: ImagesEntity[] = [];
 
-    for (const file of files) {
+    for (const [idx, file] of files.entries()) {
       const uploadResult = await this.cloudinaryService.uploadImage(file);
       const result = this.imagesRepo.create({
         public_id: uploadResult.public_id,
         secure_url: uploadResult.secure_url,
+        alt : metadata[idx].alt,
         post : postResult
       });
       imageEntities.push(result);

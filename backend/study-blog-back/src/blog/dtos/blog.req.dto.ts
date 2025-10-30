@@ -1,4 +1,18 @@
-import { ArrayNotEmpty, IsArray, IsNumber, IsString} from 'class-validator';
+import { Type } from 'class-transformer';
+import { ArrayNotEmpty, IsArray, IsBoolean, IsString, IsOptional, ValidateNested} from 'class-validator';
+
+export class ImageMetadata {
+    @IsString()
+    alt : string;
+
+    @IsOptional()
+    @IsBoolean()
+    cover? : boolean;
+
+    @IsString()
+    src : string
+
+}
 
 export class BlogReqDto {
 
@@ -11,9 +25,11 @@ export class BlogReqDto {
     @IsString()
     field : string;
 
+
     @IsArray()
-    @ArrayNotEmpty()
-    @IsString({each : true})
-    alt : string;
+    @ValidateNested({each : true})
+    @Type(()=>ImageMetadata)
+    metadata : ImageMetadata[];
 
 }
+

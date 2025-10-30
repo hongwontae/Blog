@@ -20,8 +20,11 @@ function BlogPost() {
   const [images, setImages] = useState<ImageWithAlt[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const coverInputRef = useRef<HTMLInputElement>(null);
+  const titleRef = useRef<HTMLInputElement>(null);
+  const fieldRef = useRef<HTMLSelectElement>(null);
 
   console.log(images);
+
 
   const editor = useEditor({
     extensions: [
@@ -40,9 +43,13 @@ function BlogPost() {
 
     if(!editor){return};
 
- const handleUpdate = ()=>{
-  setImages((prev)=>{
+    editor.chain().focus();
+
+  const handleUpdate = ()=>{
+    setImages((prev)=>{
+      
     return prev.filter(({src})=>{
+      console.log(editor.getHTML())
       return editor.getHTML().includes(src)
     })
   })
@@ -116,13 +123,15 @@ function BlogPost() {
 
     const formData = new FormData();
 
-    formData.append("title", "Hellow-world");
-    formData.append("field", "React");
+    formData.append("title", titleRef?.current!.value)
+    formData.append("field", fieldRef?.current!.value);
     formData.append("blogContent", editor.getHTML());
 
-    images.forEach(({ file, alt }) => {
+    const metadataArray = images.map(({alt, src, cover})=>({alt, src, cover}))
+    formData.append('metadata', JSON.stringify(metadataArray))
+
+    images.forEach(({ file}) => {
       formData.append("images", file);
-      formData.append("alt", alt);
     });
 
     const response = await fetch("http://localhost:3000/blog/create", {
@@ -138,11 +147,11 @@ function BlogPost() {
       <div className="text-white flex flex-col gap-2 mb-2">
         <div className="flex flex-row gap-2">
           <label>Title</label>
-          <input className="border-[1px] rounded-sm" type="text"></input>
+          <input ref={titleRef} className="border-[1px] rounded-sm" type="text"></input>
         </div>
         <div className="flex flex-row gap-2">
           <label>Field</label>
-          <select className="bg-black border-[1px] rounded-sm">
+          <select ref={fieldRef} className="bg-black border-[1px] rounded-sm">
             <option value="React">React</option>
             <option value="Photoshop">Photoshop</option>
             <option value="TypeScript">TypeScript</option>
