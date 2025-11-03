@@ -10,6 +10,7 @@ type ClickState = {
   photoshop: boolean;
 };
 
+
 function Category() {
   const [clickState, setClickState] = useState<ClickState>({
     react: false,
@@ -19,6 +20,7 @@ function Category() {
     css: false,
     photoshop: false,
   });
+
 
   const CategoryClass = "p-[0.4rem] pl-3 pr-3 rounded-2xl bg-white text-black";
   const whileHoverObject = {

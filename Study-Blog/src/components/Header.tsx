@@ -3,6 +3,7 @@ import BlogIcon from "../assets/Blog Icon.png";
 import ResumeIcon from "../assets/Resume Icon.png";
 import ExhibitionIcon from "../assets/Exhibition Icon.png";
 import { motion } from "framer-motion";
+import {Link} from 'react-router-dom';
 
 function Header() {
   return (
@@ -20,7 +21,7 @@ function Header() {
             className="text-white font-semibold"
             whileHover={{color : '#ef476f'}}
           >
-            Frontend & UI/UX Design
+            <Link to={"/"}>Frontend & UI/UX Design</Link>
           </motion.div>
         </div>
         <div className="text-white flex flex-row gap-10">
@@ -29,7 +30,7 @@ function Header() {
             whileHover={{ color: "#EF476F" }}
           >
             <img src={BlogIcon} alt="Blog-Icon" className="w-6 h-6"></img>
-            <div>Detail Blog</div>
+            <Link to={"/detailblogs"}><div>Detail Blog</div></Link>
           </motion.div>
           <motion.div
             className="flex flex-row gap-2"

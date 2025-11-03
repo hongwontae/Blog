@@ -44,13 +44,8 @@ export class BlogController {
     return this.blogService.deletePost(id);
   }
 
-  @Get('/show/:id')
-  showBlogPost(@Param('id') id: number) {
-    return this.blogService.showPost(id);
-  }
-
-  @Get('/shows')
-  showBlogPosts() {
-    return;
+  @Get('/test/2')
+  showPosts(){
+    return this.blogService.showPosts();
   }
 }

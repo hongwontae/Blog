@@ -16,6 +16,9 @@ export class ImagesEntity{
     @Column()
     alt : string;
 
+    @Column({nullable : true})
+    cover? : boolean;
+
     @ManyToOne(()=>BlogEntity, (blog)=>blog.images, {onDelete : 'CASCADE'})
     post : BlogEntity;
 

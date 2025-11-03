@@ -23,9 +23,6 @@ function BlogPost() {
   const titleRef = useRef<HTMLInputElement>(null);
   const fieldRef = useRef<HTMLSelectElement>(null);
 
-  console.log(images);
-
-
   const editor = useEditor({
     extensions: [
       StarterKit.configure({

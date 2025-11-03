@@ -3,8 +3,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Layout from "./pages/Layout";
 import BlogHome from "./pages/BlogHome";
 import Test from "./pages/Test";
-import Test2 from "./pages/Test2";
 import BlogPost from "./pages/BlogPost";
+import DetailBlogs from "./pages/DetailBlogs";
 
 const queryClient = new QueryClient();
 
@@ -17,6 +17,10 @@ const router = createBrowserRouter([
         index: true,
         element: <BlogHome></BlogHome>,
       },
+      {
+        path : '/detailblogs',
+        element : <DetailBlogs></DetailBlogs>
+      }
     ],
   },
   {

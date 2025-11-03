@@ -28,12 +28,25 @@ export class BlogService {
 
     const imageEntities: ImagesEntity[] = [];
 
+    let coverNum : number = 0;
+
+    metadata.forEach(({cover})=>{
+      if (cover){
+        coverNum++;
+      }
+    })
+
+    if (coverNum > 1){
+      throw new BadRequestException('cover Image가 두 개입니다.')
+    }
+
     for (const [idx, file] of files.entries()) {
       const uploadResult = await this.cloudinaryService.uploadImage(file);
       const result = this.imagesRepo.create({
         public_id: uploadResult.public_id,
         secure_url: uploadResult.secure_url,
         alt : metadata[idx].alt,
+        cover : metadata[idx]?.cover,
         post : postResult
       });
       imageEntities.push(result);
@@ -63,14 +76,16 @@ export class BlogService {
     return this.repo.remove(post);
   }
 
-  async showPost(id: number) {
-    const post = await this.repo.findOneBy({ id });
-    if (!post) {
-      throw new BadRequestException('not matched blog post');
-    }
+  async showPosts() {
+    const post = await this.repo.createQueryBuilder('post')
+    .leftJoinAndSelect(
+      'post.images',
+      'image',
+      'image.cover = :cover',
+      {cover : true}
+    ).getMany()
 
     return post;
   }
 
-  async showPosts() {}
 }
