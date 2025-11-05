@@ -5,6 +5,7 @@ import BlogHome from "./pages/BlogHome";
 import Test from "./pages/Test";
 import BlogPost from "./pages/BlogPost";
 import DetailBlogs from "./pages/DetailBlogs";
+import Test2 from "./pages/Test2";
 
 const queryClient = new QueryClient();
 
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
   },
   {
     path : '/test',
-    element : <Test></Test>
+    element : <Test2></Test2>
   },
   {
     path : '/test/2',
