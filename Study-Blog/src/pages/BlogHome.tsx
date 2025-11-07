@@ -2,8 +2,15 @@ import Category from "../components/Category";
 import Highlights from "../components/Highlights";
 import LeftIntroduce from "../components/LeftIntroduce";
 import PostList from "../components/PostList";
+import { useTagsStore } from "../zustand-store/store";
+
 
 function BlogHome() {
+
+  const {initialState} = useTagsStore();
+  console.log(initialState);
+
+    
 
   return (
     <>

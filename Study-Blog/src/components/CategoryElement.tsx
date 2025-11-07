@@ -23,6 +23,8 @@ function CategoryElement({
   whileHover,
   animate,
 }: Category) {
+
+
   return (
     <>
       <motion.div

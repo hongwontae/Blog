@@ -1,5 +1,6 @@
 import { useState } from "react";
 import CategoryElement from "./CategoryElement";
+import { useTagsStore } from "../zustand-store/store";
 
 type ClickState = {
   react: boolean;
@@ -10,7 +11,6 @@ type ClickState = {
   photoshop: boolean;
 };
 
-
 function Category() {
   const [clickState, setClickState] = useState<ClickState>({
     react: false,
@@ -20,6 +20,8 @@ function Category() {
     css: false,
     photoshop: false,
   });
+
+  const {cssClick,figmaClcik,javascriptClick,photoshopClick,reactClick,typescriptClcik} = useTagsStore()
 
 
   const CategoryClass = "p-[0.4rem] pl-3 pr-3 rounded-2xl bg-white text-black";
@@ -48,8 +50,6 @@ function Category() {
     };
   }
 
-
-
   return (
     <>
       <section className="flex flex-row justify-start text-white text-[1.1rem] items-center gap-7">
@@ -59,7 +59,10 @@ function Category() {
             className={CategoryClass}
             animate={animateFunction("react")}
             whileHover={whileHoverObject}
-            onClickFunc={() => clickFunction("react")}
+            onClickFunc={() => {
+              clickFunction("react")
+              reactClick()
+            } }
           >
             React
           </CategoryElement>
