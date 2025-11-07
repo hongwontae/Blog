@@ -19,25 +19,24 @@ export class BlogService {
     title: string,
     field: string,
     blogContent: string,
-    metadata : ImageMetadata[],
+    metadata: ImageMetadata[],
     files: Express.Multer.File[],
   ) {
-
     const post = this.repo.create({ title, blogContent, field });
     const postResult = await this.repo.save(post);
 
     const imageEntities: ImagesEntity[] = [];
 
-    let coverNum : number = 0;
+    let coverNum: number = 0;
 
-    metadata.forEach(({cover})=>{
-      if (cover){
+    metadata.forEach(({ cover }) => {
+      if (cover) {
         coverNum++;
       }
-    })
+    });
 
-    if (coverNum > 1){
-      throw new BadRequestException('cover Image가 두 개입니다.')
+    if (coverNum > 1) {
+      throw new BadRequestException('cover Image가 두 개입니다.');
     }
 
     for (const [idx, file] of files.entries()) {
@@ -45,9 +44,9 @@ export class BlogService {
       const result = this.imagesRepo.create({
         public_id: uploadResult.public_id,
         secure_url: uploadResult.secure_url,
-        alt : metadata[idx].alt,
-        cover : metadata[idx]?.cover,
-        post : postResult
+        alt: metadata[idx].alt,
+        cover: metadata[idx]?.cover,
+        post: postResult,
       });
       imageEntities.push(result);
     }
@@ -76,16 +75,21 @@ export class BlogService {
     return this.repo.remove(post);
   }
 
-  async showPosts() {
-    const post = await this.repo.createQueryBuilder('post')
-    .leftJoinAndSelect(
-      'post.images',
-      'image',
-      'image.cover = :cover',
-      {cover : true}
-    ).getMany()
+  async showPosts(query: {
+    react: boolean;
+    css: boolean;
+    figma: boolean;
+    javascript: boolean;
+    typescript: boolean;
+    photoshop: boolean;
+  }) {
+    const post = await this.repo
+      .createQueryBuilder('post')
+      .leftJoinAndSelect('post.images', 'image', 'image.cover = :cover', {
+        cover: true,
+      })
+      .getMany();
 
     return post;
   }
-
 }

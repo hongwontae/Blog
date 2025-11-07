@@ -2,7 +2,6 @@ import { create } from "zustand";
 
 interface tagsState {
   initialState: {
-    init: boolean;
     react: boolean;
     figma: boolean;
     javascript: boolean;
@@ -15,13 +14,12 @@ interface tagsState {
   javascriptClick : ()=>void;
   typescriptClcik : ()=>void;
   cssClick : ()=>void;
-  photoshopClick : ()=>void
+  photoshopClick : ()=>void;
 }
 
 export const useTagsStore = create<tagsState>((set) => {
   return {
     initialState: {
-      init: true,
       react: false,
       figma: false,
       javascript: false,

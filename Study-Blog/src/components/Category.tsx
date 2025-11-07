@@ -1,28 +1,16 @@
-import { useState } from "react";
 import CategoryElement from "./CategoryElement";
 import { useTagsStore } from "../zustand-store/store";
 
-type ClickState = {
-  react: boolean;
-  figma: boolean;
-  javascript: boolean;
-  typescript: boolean;
-  css: boolean;
-  photoshop: boolean;
-};
-
 function Category() {
-  const [clickState, setClickState] = useState<ClickState>({
-    react: false,
-    figma: false,
-    javascript: false,
-    typescript: false,
-    css: false,
-    photoshop: false,
-  });
-
-  const {cssClick,figmaClcik,javascriptClick,photoshopClick,reactClick,typescriptClcik} = useTagsStore()
-
+  const {
+    initialState,
+    cssClick,
+    figmaClcik,
+    javascriptClick,
+    photoshopClick,
+    reactClick,
+    typescriptClcik,
+  } = useTagsStore();
 
   const CategoryClass = "p-[0.4rem] pl-3 pr-3 rounded-2xl bg-white text-black";
   const whileHoverObject = {
@@ -31,22 +19,13 @@ function Category() {
     transition: { type: "tween", duration: 0.5 },
   } as const;
 
-  function clickFunction(key: keyof ClickState) {
-    setClickState((prev) => {
-      return {
-        ...prev,
-        [key]: !prev[key],
-      };
-    });
-  }
-
-  function animateFunction(data: keyof ClickState): {
+  function animateFunction(data: keyof typeof initialState): {
     backgroundColor: string;
     color: string;
   } {
     return {
-      backgroundColor: clickState[data] ? "#121212" : "",
-      color: clickState[data] ? "#ffffff" : "",
+      backgroundColor: initialState[data] ? "#121212" : "",
+      color: initialState[data] ? "#ffffff" : "",
     };
   }
 
@@ -59,10 +38,7 @@ function Category() {
             className={CategoryClass}
             animate={animateFunction("react")}
             whileHover={whileHoverObject}
-            onClickFunc={() => {
-              clickFunction("react")
-              reactClick()
-            } }
+            onClickFunc={reactClick}
           >
             React
           </CategoryElement>
@@ -71,7 +47,7 @@ function Category() {
             className={CategoryClass}
             animate={animateFunction("figma")}
             whileHover={whileHoverObject}
-            onClickFunc={() => clickFunction("figma")}
+            onClickFunc={figmaClcik}
           >
             Figma
           </CategoryElement>
@@ -80,7 +56,7 @@ function Category() {
             className={CategoryClass}
             animate={animateFunction("javascript")}
             whileHover={whileHoverObject}
-            onClickFunc={() => clickFunction("javascript")}
+            onClickFunc={javascriptClick}
           >
             JavaScript
           </CategoryElement>
@@ -88,7 +64,7 @@ function Category() {
             className={CategoryClass}
             animate={animateFunction("typescript")}
             whileHover={whileHoverObject}
-            onClickFunc={() => clickFunction("typescript")}
+            onClickFunc={typescriptClcik}
           >
             TypeScript
           </CategoryElement>
@@ -96,7 +72,7 @@ function Category() {
             className={CategoryClass}
             animate={animateFunction("css")}
             whileHover={whileHoverObject}
-            onClickFunc={() => clickFunction("css")}
+            onClickFunc={cssClick}
           >
             CSS
           </CategoryElement>
@@ -104,7 +80,7 @@ function Category() {
             className={CategoryClass}
             animate={animateFunction("photoshop")}
             whileHover={whileHoverObject}
-            onClickFunc={() => clickFunction("photoshop")}
+            onClickFunc={photoshopClick}
           >
             Photoshop
           </CategoryElement>

@@ -6,9 +6,9 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UploadedFiles,
   UseInterceptors,
-  
 } from '@nestjs/common';
 import { BlogReqDto, ImageMetadata } from './dtos/blog.req.dto';
 import { BlogService } from './blog.service';
@@ -21,17 +21,23 @@ export class BlogController {
   @UseInterceptors(FilesInterceptor('images'))
   @Post('/create')
   createBlogPost(
-    @Body('title') title : string,
-    @Body('blogContent') blogContent : string,
-    @Body('field') field : string,
-    @Body('metadata') metadataString : string,
+    @Body('title') title: string,
+    @Body('blogContent') blogContent: string,
+    @Body('field') field: string,
+    @Body('metadata') metadataString: string,
     @UploadedFiles() files: Express.Multer.File[],
   ) {
-    console.log(field)
+    console.log(field);
 
-    const metadata : ImageMetadata[] = JSON.parse(metadataString)
-    
-    return this.blogService.createPost(title, field, blogContent, metadata, files)
+    const metadata: ImageMetadata[] = JSON.parse(metadataString);
+
+    return this.blogService.createPost(
+      title,
+      field,
+      blogContent,
+      metadata,
+      files,
+    );
   }
 
   @Patch('/update/:id')
@@ -44,8 +50,18 @@ export class BlogController {
     return this.blogService.deletePost(id);
   }
 
-  @Get('/test/2')
-  showPosts(){
-    return this.blogService.showPosts();
+  @Get('/post')
+  showPosts(
+    @Query()
+    query: {
+      react: boolean;
+      css: boolean;
+      figma: boolean;
+      javascript: boolean;
+      typescript: boolean;
+      photoshop: boolean;
+    },
+  ) {
+    return this.blogService.showPosts(query);
   }
 }
