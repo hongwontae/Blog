@@ -1,18 +1,15 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 import { BlogService } from './blog.service';
+import { ImageMetadata } from './dtos/blog.req.dto';
 
-describe('BlogService', () => {
-  let service: BlogService;
+it('can create an instance of blog service', async () => {
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [BlogService],
-    }).compile();
 
-    service = module.get<BlogService>(BlogService);
-  });
+  const module = await Test.createTestingModule({
+    providers: [BlogService],
+  }).compile();
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
+  const blogService = module.get(BlogService);
+
+  expect(blogService).toBeDefined();
 });

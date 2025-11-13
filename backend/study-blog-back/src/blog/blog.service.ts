@@ -22,6 +22,7 @@ export class BlogService {
     metadata: ImageMetadata[],
     files: Express.Multer.File[],
   ) {
+    console.log(metadata);
     const post = this.repo.create({ title, blogContent, field });
     const postResult = await this.repo.save(post);
 

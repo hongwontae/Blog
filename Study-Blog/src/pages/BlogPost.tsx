@@ -23,6 +23,7 @@ function BlogPost() {
   const titleRef = useRef<HTMLInputElement>(null);
   const fieldRef = useRef<HTMLSelectElement>(null);
 
+
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -33,20 +34,22 @@ function BlogPost() {
         lowlight: low,
       }),
     ],
-    content: "<p>블로그 글은 여기서 작성해주세요.<p/>",
+    content: "",
   });
+
+  console.log(editor.getHTML())
+  
 
   useEffect(()=>{
 
-    if(!editor){return};
+  if(!editor){return};
 
-    editor.chain().focus();
+  editor.chain().focus();
 
   const handleUpdate = ()=>{
     setImages((prev)=>{
       
     return prev.filter(({src})=>{
-      console.log(editor.getHTML())
       return editor.getHTML().includes(src)
     })
   })
@@ -125,6 +128,7 @@ function BlogPost() {
     formData.append("blogContent", editor.getHTML());
 
     const metadataArray = images.map(({alt, src, cover})=>({alt, src, cover}))
+    console.log(metadataArray);
     formData.append('metadata', JSON.stringify(metadataArray))
 
     images.forEach(({ file}) => {

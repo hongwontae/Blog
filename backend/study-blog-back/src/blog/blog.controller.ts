@@ -21,21 +21,19 @@ export class BlogController {
   @UseInterceptors(FilesInterceptor('images'))
   @Post('/create')
   createBlogPost(
-    @Body('title') title: string,
-    @Body('blogContent') blogContent: string,
-    @Body('field') field: string,
-    @Body('metadata') metadataString: string,
+    @Body() body : BlogReqDto,
     @UploadedFiles() files: Express.Multer.File[],
   ) {
-    console.log(field);
 
-    const metadata: ImageMetadata[] = JSON.parse(metadataString);
+
+    console.log(body)
+    console.log(files)
 
     return this.blogService.createPost(
-      title,
-      field,
-      blogContent,
-      metadata,
+      body.title,
+      body.field,
+      body.blogContent,
+      JSON.parse(body.metadata) as ImageMetadata[],
       files,
     );
   }
